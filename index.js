@@ -36,7 +36,10 @@ async function checkNewVideo() {
     const channel = "https://www.youtube.com/@duki/videos";
 
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        });
+        
         const page = await browser.newPage();
         await page.goto(channel);
         const videoElement = await page.waitForSelector('.style-scope ytd-rich-grid-row');
