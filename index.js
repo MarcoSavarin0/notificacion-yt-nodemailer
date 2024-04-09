@@ -53,8 +53,6 @@ async function checkNewVideo() {
         const previousVideoTitle = cache.get('previousVideoTitle');
         if (latestVideoTitle !== previousVideoTitle) {
             console.log("SE CAMBIO EL NOMBRE DEL VIDEO!", videoUrl);
-            console.log("**********"+process.env.GMAIL_USER + "***********");
-            console.log("**********"+process.env.GMAIL_PASSWORD + "***********");
             cache.set('previousVideoTitle', latestVideoTitle);
             await sendEmail("savarinomarco50@gmail.com", "Nuevo Tema Del duko!", `Name: ${latestVideoTitle} url: ${videoUrl}`)
         }
