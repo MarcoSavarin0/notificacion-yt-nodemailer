@@ -33,13 +33,13 @@ async function sendEmail(to, subject, text) {
 }
 
 async function checkNewVideo() {
-    const channel = "https://www.youtube.com/@marckingg7320/videos";
+    const channel = "https://www.youtube.com/@duki/videos";
 
     try {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(channel);
-        const videoElement = await page.waitForSelector('.style-scope ytd-rich-grid-media');
+        const videoElement = await page.waitForSelector('.style-scope ytd-rich-grid-row');
         const latestVideoTitle = await page.evaluate(() => {
             const titleElement = document.querySelector('.style-scope ytd-rich-grid-media #video-title');
             return titleElement ? titleElement.textContent.trim() : "";
@@ -59,23 +59,7 @@ async function checkNewVideo() {
     }
 }
 
-// async function checkNewPostIg() {
-//     try {
-//         const browser = await puppeteer.launch();
-//         const page = await browser.newPage();
-//         await page.goto('https://www.instagram.com/accounts/login/');
-//         await page.waitForSelector('input[name="username"]');
-//         await page.type('input[name="username"]', `tu_usuario`);
-//         await page.type('input[name="password"]', `tu_contraseña`);
-//         await page.click('button[type="submit"]');
-//         const username = 'usuario_objetivo';
-//         await page.goto(`https://www.instagram.com/${username}/`);
 
-//     } catch (error) {
-//         console.error("Error checking for new post ig:", error);
-//         return null;
-//     }
-// }
 
 
 
