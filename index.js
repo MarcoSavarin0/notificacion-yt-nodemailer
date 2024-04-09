@@ -19,6 +19,7 @@ const transporter = createTransport({
 
 async function sendEmail(to, subject, text) {
     try {
+        
         const mailOptions = {
             from: process.env.GMAIL_USER,
             to: to,
@@ -39,7 +40,7 @@ async function checkNewVideo() {
         const browser = await puppeteer.launch({
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
-        
+
         const page = await browser.newPage();
         await page.goto(channel);
         const videoElement = await page.waitForSelector('.style-scope ytd-rich-grid-row');
@@ -52,6 +53,8 @@ async function checkNewVideo() {
         const previousVideoTitle = cache.get('previousVideoTitle');
         if (latestVideoTitle !== previousVideoTitle) {
             console.log("SE CAMBIO EL NOMBRE DEL VIDEO!", videoUrl);
+            console.log("**********"+process.env.GMAIL_USER + "***********");
+            console.log("**********"+process.env.GMAIL_PASSWORD + "***********");
             cache.set('previousVideoTitle', latestVideoTitle);
             await sendEmail("savarinomarco50@gmail.com", "Nuevo Tema Del duko!", `Name: ${latestVideoTitle} url: ${videoUrl}`)
         }
